@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown</title>
+    <style>
+        .drop{
+            width: 105px ;
+            border: 1px solid black;
+            padding: 10px;
+            cursor: pointer; 
+        }
+        .menu{
+            display: none;
+            position: absolute;
+            width: 85px ;
+            border: 1px solid black;
+            padding: 10px; 
+            background-color: white; 
+        }
+        .down{
+            padding: 10px;
+            cursor: pointer;
+        }
+        .down:hover {
+            background-color: #ddd; 
+        }
+    </style>
+</head>
+<body>
+    <div class="drop" id="drop">Dropdown</div>
+    <div class="menu" id="options">
+       <div class="down">Item 1</div>
+       <div class="down">Item 2</div>
+       <div class="down">Item 3</div> 
+    </div>
+    <script src="q4.js"></script>
+</body>
+</html>
