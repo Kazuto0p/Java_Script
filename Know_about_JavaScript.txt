@@ -1,0 +1,323 @@
+### **Important JavaScript Syntax & Keywords You Should Remember**
+Here’s a structured list of essential JavaScript syntax, keywords, and concepts you should know.
+
+---
+
+## **1. Variables & Constants**
+### **Syntax:**
+```javascript
+var x = 10;    // Function-scoped (old way, avoid using)
+let y = 20;    // Block-scoped (modern usage)
+const z = 30;  // Block-scoped and cannot be reassigned
+```
+### **Keywords to Remember:**
+- `var`, `let`, `const`
+
+---
+
+## **2. Data Types**
+### **Primitive Data Types:**
+```javascript
+let str = "Hello";    // String
+let num = 10;         // Number
+let isTrue = true;    // Boolean
+let value = null;     // Null
+let undef;            // Undefined
+let bigInt = 123456789012345678901234567890n; // BigInt
+let sym = Symbol("id"); // Symbol
+```
+### **Keywords to Remember:**
+- `String`, `Number`, `Boolean`, `null`, `undefined`, `BigInt`, `Symbol`
+
+---
+
+## **3. Operators**
+### **Arithmetic:**
+```javascript
+let sum = 10 + 5;   // Addition
+let diff = 10 - 5;  // Subtraction
+let prod = 10 * 5;  // Multiplication
+let div = 10 / 5;   // Division
+let mod = 10 % 3;   // Modulus
+let exp = 2 ** 3;   // Exponentiation (2^3)
+```
+
+### **Comparison:**
+```javascript
+console.log(10 == "10");  // true (loose equality)
+console.log(10 === "10"); // false (strict equality)
+console.log(10 != "10");  // false (loose inequality)
+console.log(10 !== "10"); // true (strict inequality)
+console.log(10 > 5);      // true
+console.log(10 < 5);      // false
+```
+
+### **Logical:**
+```javascript
+let a = true, b = false;
+console.log(a && b); // false (AND)
+console.log(a || b); // true (OR)
+console.log(!a);     // false (NOT)
+```
+
+### **Keywords to Remember:**
+- `+`, `-`, `*`, `/`, `%`, `**`
+- `==`, `===`, `!=`, `!==`, `>`, `<`, `>=`, `<=`
+- `&&`, `||`, `!`
+
+---
+
+## **4. Conditional Statements**
+### **if-else:**
+```javascript
+let age = 18;
+if (age >= 18) {
+    console.log("Adult");
+} else {
+    console.log("Minor");
+}
+```
+
+### **Switch-case:**
+```javascript
+let color = "red";
+switch (color) {
+    case "red":
+        console.log("Stop");
+        break;
+    case "yellow":
+        console.log("Slow down");
+        break;
+    case "green":
+        console.log("Go");
+        break;
+    default:
+        console.log("Invalid color");
+}
+```
+
+### **Ternary Operator:**
+```javascript
+let result = age >= 18 ? "Adult" : "Minor";
+console.log(result);
+```
+
+### **Keywords to Remember:**
+- `if`, `else`, `else if`, `switch`, `case`, `default`, `break`, `? :`
+
+---
+
+## **5. Loops**
+### **For Loop:**
+```javascript
+for (let i = 0; i < 5; i++) {
+    console.log(i);
+}
+```
+
+### **While Loop:**
+```javascript
+let count = 0;
+while (count < 5) {
+    console.log(count);
+    count++;
+}
+```
+
+### **Do-While Loop:**
+```javascript
+let num = 0;
+do {
+    console.log(num);
+    num++;
+} while (num < 5);
+```
+
+### **For-in (Loop through Object Properties):**
+```javascript
+let person = { name: "Alice", age: 25 };
+for (let key in person) {
+    console.log(key, person[key]);
+}
+```
+
+### **For-of (Loop through Array Elements):**
+```javascript
+let numbers = [1, 2, 3];
+for (let num of numbers) {
+    console.log(num);
+}
+```
+
+### **Keywords to Remember:**
+- `for`, `while`, `do-while`
+- `break`, `continue`
+- `for-in`, `for-of`
+
+---
+
+## **6. Functions**
+### **Regular Function:**
+```javascript
+function add(a, b) {
+    return a + b;
+}
+console.log(add(2, 3));
+```
+
+### **Arrow Function (ES6+):**
+```javascript
+const multiply = (a, b) => a * b;
+console.log(multiply(2, 3));
+```
+
+### **Anonymous Function (Function without a Name):**
+```javascript
+let greet = function() {
+    console.log("Hello");
+};
+greet();
+```
+
+### **Immediately Invoked Function Expression (IIFE):**
+```javascript
+(function() {
+    console.log("IIFE executed");
+})();
+```
+
+### **Keywords to Remember:**
+- `function`, `return`
+- `=>` (Arrow function)
+- `()` (IIFE)
+
+---
+
+## **7. Callbacks & Promises**
+### **Callback Function:**
+```javascript
+function fetchData(callback) {
+    setTimeout(() => {
+        console.log("Data fetched");
+        callback();
+    }, 1000);
+}
+
+fetchData(() => console.log("Callback executed"));
+```
+
+### **Promise:**
+```javascript
+let promise = new Promise((resolve, reject) => {
+    let success = true;
+    if (success) resolve("Success!");
+    else reject("Error!");
+});
+
+promise
+    .then(result => console.log(result))
+    .catch(error => console.log(error));
+```
+
+### **Async/Await:**
+```javascript
+async function fetchData() {
+    return "Fetched Data";
+}
+
+fetchData().then(console.log);
+```
+
+### **Keywords to Remember:**
+- `callback`, `setTimeout()`
+- `new Promise()`, `resolve`, `reject`
+- `then`, `catch`
+- `async`, `await`
+
+---
+
+## **8. Exception Handling**
+### **Try-Catch:**
+```javascript
+try {
+    let x = 10 / 0;
+    console.log(x);
+} catch (error) {
+    console.log("Error:", error.message);
+} finally {
+    console.log("Execution completed");
+}
+```
+
+### **Keywords to Remember:**
+- `try`, `catch`, `finally`
+- `throw new Error()`
+
+---
+
+## **9. Objects & Arrays**
+### **Object Syntax:**
+```javascript
+let person = {
+    name: "Alice",
+    age: 25,
+    greet: function() {
+        console.log("Hello, " + this.name);
+    }
+};
+console.log(person.name);
+person.greet();
+```
+
+### **Array Syntax:**
+```javascript
+let arr = [1, 2, 3];
+console.log(arr[0]); // Access first element
+arr.push(4); // Add element
+console.log(arr);
+```
+
+### **Keywords to Remember:**
+- `Object`, `{}`, `.`
+- `Array`, `[]`, `.push()`, `.pop()`, `.length`
+
+---
+
+## **10. Modules (ES6)**
+### **Exporting a Module:**
+```javascript
+export function sayHello() {
+    console.log("Hello");
+}
+```
+
+### **Importing a Module:**
+```javascript
+import { sayHello } from './module.js';
+sayHello();
+```
+
+### **Keywords to Remember:**
+- `export`, `import`
+
+---
+
+## **11. DOM Manipulation**
+```javascript
+document.getElementById("myId").innerText = "Hello";
+document.querySelector(".myClass").style.color = "red";
+document.createElement("div");
+```
+
+### **Keywords to Remember:**
+- `document`, `getElementById`, `querySelector`, `createElement`
+
+---
+
+### **Final Notes**
+- Learn **ES6+ features** (`let`, `const`, `arrow functions`, `async/await`, `destructuring`).
+- Understand **callbacks, promises, and async/await** to handle asynchronous code.
+- Practice **error handling** with `try...catch`.
+- Use **modules** (`import/export`) for scalable code.
+
+Would you like a cheat sheet or real-world examples? 🚀
