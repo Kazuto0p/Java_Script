@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock</title>
+    <style>
+        .clock {
+            height: 350px;
+            width: 350px;
+            border: 14px solid rgb(20, 150, 128);
+            border-radius: 50%;
+            position: relative;
+            top: -20px;
+            left: -1px;
+            background-color: black;
+        }
+
+        body {
+            background-color: bisque;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            transition-timing-function: linear;
+            transform: translateX(-50%);
+        }
+
+        .hour {
+            height: 68px;
+            width: 6px;
+            background-color: whitesmoke;
+            
+        }
+
+        .minute {
+            height: 122px;
+            width: 6px;
+            background-color: rgb(79, 185, 52);
+        }
+
+        .second {
+            height: 152px;
+            width: 3px;
+            background-color: rgb(185, 0, 0);
+            transition: 1s;
+            transition-timing-function: linear;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="hand hour" id="h"></div>
+        <div class="hand minute" id="m"></div>
+        <div class="hand second" id="s"></div>
+    </div>
+
+    <script src="manual.js"></script>
+</body>
+</html>

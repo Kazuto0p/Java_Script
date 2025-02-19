@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock</title>
+    <style>
+        .clock {
+            height: 350px;
+            width: 350px;
+            border: 14px solid rgb(20, 150, 128);
+            border-radius: 50%;
+            position: relative;
+            top: 135px;
+            left: 265px;
+            background-color: black;
+        }
+
+        body {
+            background-color: bisque;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            transition-timing-function: linear;
+            transform: translateX(-50%);
+        }
+
+        .hour {
+            height: 68px;
+            width: 6px;
+            background-color: whitesmoke;
+        }
+
+        .minute {
+            height: 122px;
+            width: 6px;
+            background-color: rgb(79, 185, 52);
+        }
+
+        .second {
+            height: 152px;
+            width: 3px;
+            background-color: rgb(185, 0, 0);
+        }
+
+        .number {
+            position: absolute;
+            color: whitesmoke;
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        /* Number positions */
+        .number:nth-child(1) { top: 10px; left: 50%; transform: translateX(-50%); }
+        .number:nth-child(2) { top: 40px; left: 85%; transform: translateX(-50%); }
+        .number:nth-child(3) { top: 50%; left: 90%; transform: translateY(-50%); }
+        .number:nth-child(4) { bottom: 40px; left: 85%; transform: translateX(-50%); }
+        .number:nth-child(5) { bottom: 10px; left: 50%; transform: translateX(-50%); }
+        .number:nth-child(6) { bottom: 40px; left: 15%; transform: translateX(-50%); }
+        .number:nth-child(7) { top: 50%; left: 10%; transform: translateY(-50%); }
+        .number:nth-child(8) { top: 40px; left: 15%; transform: translateX(-50%); }
+        .number:nth-child(9) { top: 10px; left: 50%; transform: translateX(-50%); }
+        .number:nth-child(10) { top: 40px; left: 85%; transform: translateX(-50%); }
+        .number:nth-child(11) { top: 50%; left: 90%; transform: translateY(-50%); }
+
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <!-- Numbering the clock -->
+        <div class="number">1</div>
+        <div class="number">2</div>
+        <div class="number">3</div>
+        <div class="number">4</div>
+        <div class="number">5</div>
+        <div class="number">6</div>
+        <div class="number">7</div>
+        <div class="number">8</div>
+        <div class="number">9</div>
+        <div class="number">10</div>
+        <div class="number">11</div>
+        <div class="number">12</div>
+
+        <!-- Clock Hands -->
+        <div class="hand hour" id="h"></div>
+        <div class="hand minute" id="m"></div>
+        <div class="hand second" id="s"></div>
+    </div>
+
+    <script src="manual.js"></script>
+</body>
+</html>
