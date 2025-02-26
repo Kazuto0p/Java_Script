@@ -1,3 +1,43 @@
+Resource :-
+
+db.employees.insertMany([
+    { emp_id: 101, emp_name: "John Doe", age: 30, experience: 5, details: { department: "IT", address: "123 Main St, NY", skills: ["Python", "Java"] } },
+    { emp_id: 102, emp_name: "Alice Smith", age: 28, experience: 3, details: { department: "HR", address: "456 Elm St, CA", skills: ["Recruitment", "Training"] } },
+    { emp_id: 103, emp_name: "Robert Brown", age: 35, experience: 8, details: { department: "Finance", address: "789 Pine St, TX", skills: ["Accounting", "Auditing"] } },
+    { emp_id: 104, emp_name: "Emma Johnson", age: 32, experience: 6, details: { department: "Marketing", address: "101 Oak St, FL", skills: ["SEO", "Digital Marketing"] } },
+    { emp_id: 105, emp_name: "Michael Lee", age: 29, experience: 4, details: { department: "IT", address: "202 Cedar St, IL", skills: ["JavaScript", "React"] } },
+    { emp_id: 106, emp_name: "Sophia Wilson", age: 31, experience: 5, details: { department: "Admin", address: "303 Birch St, WA", skills: ["Management", "Scheduling"] } },
+    { emp_id: 107, emp_name: "Daniel Martinez", age: 27, experience: 2, details: { department: "IT", address: "404 Walnut St, CO", skills: ["C++", "Python"] } },
+    { emp_id: 108, emp_name: "Olivia Taylor", age: 33, experience: 7, details: { department: "Finance", address: "505 Redwood St, AZ", skills: ["Investment", "Risk Analysis"] } },
+    { emp_id: 109, emp_name: "William Anderson", age: 26, experience: 1, details: { department: "Sales", address: "606 Aspen St, NV", skills: ["Negotiation", "CRM"] } },
+    { emp_id: 110, emp_name: "Charlotte Thomas", age: 34, experience: 9, details: { department: "HR", address: "707 Magnolia St, GA", skills: ["Employee Relations"] } },
+    { emp_id: 111, emp_name: "James White", age: 30, experience: 5, details: { department: "IT", address: "808 Juniper St, MI", skills: ["AI", "Machine Learning"] } },
+    { emp_id: 112, emp_name: "Emily Harris", age: 29, experience: 4, details: { department: "Marketing", address: "909 Cypress St, NC", skills: ["Brand Management", "Copywriting"] } },
+    { emp_id: 113, emp_name: "Benjamin Scott", age: 31, experience: 6, details: { department: "IT", address: "111 Maple St, OH", skills: ["Django", "Node.js"] } },
+    { emp_id: 114, emp_name: "Mia Young", age: 27, experience: 3, details: { department: "Finance", address: "222 Spruce St, OR", skills: ["Financial Analysis", "Tax Planning"] } },
+    { emp_id: 115, emp_name: "David King", age: 35, experience: 10, details: { department: "Admin", address: "333 Fir St, TN", skills: ["Leadership", "Operations"] } },
+    { emp_id: 116, emp_name: "Ava Adams", age: 26, experience: 2, details: { department: "Sales", address: "444 Ash St, PA", skills: ["Cold Calling", "Lead Generation"] } },
+    { emp_id: 117, emp_name: "Henry Nelson", age: 32, experience: 7, details: { department: "IT", address: "555 Elm St, TX", skills: ["Full Stack Development"] } },
+    { emp_id: 118, emp_name: "Grace Carter", age: 30, experience: 5, details: { department: "HR", address: "666 Poplar St, VA", skills: ["Policy Making"] } },
+    { emp_id: 119, emp_name: "Ethan Baker", age: 28, experience: 4, details: { department: "IT", address: "777 Chestnut St, SC", skills: ["Cybersecurity", "Cloud Computing"] } },
+    { emp_id: 120, emp_name: "Lily Rodriguez", age: 33, experience: 8, details: { department: "Finance", address: "888 Sequoia St, MA", skills: ["Budgeting", "Risk Management"] } },
+    { emp_id: 121, emp_name: "Jacob Hall", age: 27, experience: 3, details: { department: "Marketing", address: "999 Willow St, MO", skills: ["PPC Advertising", "Market Research"] } },
+    { emp_id: 122, emp_name: "Scarlett Wright", age: 29, experience: 5, details: { department: "Admin", address: "112 Redwood St, MN", skills: ["Event Planning", "Compliance"] } },
+    { emp_id: 123, emp_name: "Lucas Green", age: 34, experience: 9, details: { department: "IT", address: "223 Hickory St, CO", skills: ["Blockchain", "DevOps"] } },
+    { emp_id: 124, emp_name: "Zoe Walker", age: 31, experience: 6, details: { department: "HR", address: "334 Maple St, AL", skills: ["Conflict Resolution"] } },
+    { emp_id: 125, emp_name: "Mason Harris", age: 26, experience: 2, details: { department: "Sales", address: "445 Cypress St, AK", skills: ["B2B Sales", "Customer Retention"] } },
+    { emp_id: 126, emp_name: "Harper Lewis", age: 30, experience: 5, details: { department: "Finance", address: "556 Birch St, KY", skills: ["Investment Banking"] } },
+    { emp_id: 127, emp_name: "Elijah Scott", age: 35, experience: 10, details: { department: "Admin", address: "667 Pine St, OK", skills: ["Logistics Management"] } },
+    { emp_id: 128, emp_name: "Sofia Martin", age: 32, experience: 7, details: { department: "IT", address: "778 Oak St, MT", skills: ["Cloud Security", "Server Management"] } },
+    { emp_id: 129, emp_name: "Jackson Clark", age: 28, experience: 4, details: { department: "Marketing", address: "889 Walnut St, WV", skills: ["Email Marketing", "Brand Strategy"] } },
+    { emp_id: 130, emp_name: "Ella Mitchell", age: 29, experience: 5, details: { department: "HR", address: "990 Ash St, NH", skills: ["Workforce Planning"] } }
+]);
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 Here are some questions based on the **Update** section from your MongoDB PDF:
 
 ### **Basic Update Operations:**
