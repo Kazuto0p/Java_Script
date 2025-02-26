@@ -1,0 +1,36 @@
+If **upsert: false** is used (or if you don't specify `upsert` at all), MongoDB will **only update existing documents** and will not insert a new one if no match is found.  
+
+### **Example Without Upsert (`upsert: false`)**
+```javascript
+db.users.updateOne(
+    { name: "John Doe" },  // Filter condition
+    { $set: { age: 30 } },  // Update operation
+    { upsert: false }       // Explicitly disabling upsert (default behavior)
+);
+```
+#### **What happens?**
+- If a document with `{ name: "John Doe" }` **exists**, it updates the `age` field.
+- If **no matching document** exists, **nothing happens** (MongoDB does not insert a new document).
+
+---
+
+### **Comparison: `upsert: true` vs. `upsert: false`**
+| Scenario                          | `upsert: true` (Insert if not found) | `upsert: false` (Default, No Insert) |
+|------------------------------------|--------------------------------------|--------------------------------------|
+| **Matching document exists**       | Updates the document                | Updates the document                |
+| **No matching document exists**    | Inserts a new document              | Does nothing                        |
+
+---
+
+### **Practical Use Cases**
+✅ **Use `upsert: true` when:**  
+- You want **to insert** a document if it doesn’t exist.  
+- Example: User logs in for the first time, and you want to create their profile automatically.
+
+🚫 **Use `upsert: false` when:**  
+- You only want to update documents **if they already exist**.  
+- Example: Updating a user's last login time but **not creating a new account** if the user does not exist.  
+
+---
+
+Would you like me to show more advanced examples? 🚀
