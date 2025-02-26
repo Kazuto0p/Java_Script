@@ -34,3 +34,76 @@ db.users.updateOne(
 ---
 
 Would you like me to show more advanced examples? 🚀
+
+
+
+====================================================================================================================================
+
+
+### **What is `$addToSet` in MongoDB?**  
+`$addToSet` is an update operator in MongoDB that **adds an element to an array only if it does not already exist**. This helps **prevent duplicate values** in an array field.
+
+---
+
+### **Basic Example**  
+#### **Adding a new hobby to a user’s document**  
+```javascript
+db.users.updateOne(
+    { name: "John Doe" },
+    { $addToSet: { hobbies: "reading" } }
+);
+```
+#### **What happens?**  
+- If `"reading"` **is not already in** the `hobbies` array, it will be added.  
+- If `"reading"` **is already present**, MongoDB **does nothing** (prevents duplication).  
+
+---
+
+### **Comparison: `$push` vs. `$addToSet`**
+| Operator  | Adds Value If Duplicate Exists? | Prevents Duplicates? |
+|-----------|---------------------------------|----------------------|
+| `$push`   | **Yes**, always adds the value  | ❌ No                 |
+| `$addToSet` | **No**, adds only if not present | ✅ Yes                 |
+
+#### **Example: Using `$push` (Allows Duplicates)**
+```javascript
+db.users.updateOne(
+    { name: "John Doe" },
+    { $push: { hobbies: "reading" } }
+);
+```
+If `"reading"` is already in the array, it will **add another "reading"**, causing duplicates.
+
+#### **Example: Using `$addToSet` (Prevents Duplicates)**
+```javascript
+db.users.updateOne(
+    { name: "John Doe" },
+    { $addToSet: { hobbies: "reading" } }
+);
+```
+If `"reading"` is already in the array, **it will not be added again**.
+
+---
+
+### **Using `$addToSet` with Multiple Elements**
+✅ **Using `$each` to add multiple unique elements:**  
+```javascript
+db.users.updateOne(
+    { name: "John Doe" },
+    { $addToSet: { hobbies: { $each: ["coding", "gaming", "reading"] } } }
+);
+```
+- Each value is checked individually before being added.
+- If `"reading"` already exists, it **will not be added again**.
+
+---
+
+### **Practical Use Cases**
+✅ Use `$addToSet` when:
+- You want to **ensure unique values** in an array.
+- Example: Adding **unique skills** to a developer's profile.
+
+🚫 Use `$push` when:
+- You **don't care about duplicates** and just want to add values.
+
+Would you like a real-world example for a project you're working on? 🚀
