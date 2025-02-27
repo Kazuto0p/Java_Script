@@ -1,0 +1,81 @@
+JSON = (Java Script Object Notation) data inter changed format
+        Used for exchanging data between a server and web application
+        JSON files {key:value} OR [value1,value2,value3]
+        JSON.stringify() = converts a JS object to JSON String.
+        JSON.parse() = converts a JSON to a js Object.
+
+
+
+const names = ["akhil","patrick","manu","sandy"]
+
+const jsonstring = JSON.stringify(names);
+console.log(names);
+
+console.log(jsonstring);
+
+
+
+
+const person={
+    name:"akhil",
+    age:20
+}
+const jstring = JSON.stringify(person);
+console.log(person);
+console.log(jstring);
+
+
+const people = [
+    { name: "Alice", age: 25 },
+    { name: "Bob", age: 30 },
+    { name: "Charlie", age: 22 },
+    { name: "David", age: 28 },
+    { name: "Emma", age: 26 }
+  ];
+  
+  console.log(people);
+
+  const pjstring=JSON.stringify(people)
+  console.log(pjstring);
+
+
+
+///parse
+
+
+const jsonnames = `["akhil","patrick","manu","sandy"]`
+
+const parsedata = JSON.parse(jsonnames);
+console.log(typeof parsedata);
+console.log(typeof jsonnames);
+
+
+
+
+
+
+const jsonperson=`{
+    "name":"akhil",
+    "age":20
+}`
+// const jstring = JSON.stringify(person);
+const jp = JSON.parse(jsonperson)
+console.log(jp);
+console.log(typeof jsonperson);
+
+
+
+
+
+const jsonpeople = `[
+    { name: "Alice", age: 25 },
+    { name: "Bob", age: 30 },
+    { name: "Charlie", age: 22 },
+    { name: "David", age: 28 },
+    { name: "Emma", age: 26 }
+  ];`
+  
+
+
+//   const pjstring=JSON.stringify(people);
+  
