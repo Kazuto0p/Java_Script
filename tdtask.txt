@@ -1,0 +1,400 @@
+1. Write a MongoDB query to display all the documents in the collection restaurants.
+
+ * Restaurant> db.restaurants.find()
+ 
+ 2. Write a MongoDB query to display the fields restaurant_id, name, borough and cuisine for
+all the documents in the collection restaurant.
+
+ * Restaurant> db.restaurants.find({},{_id:1,name:1,borough:1,cuisine:1})
+ 
+ 3. Write a MongoDB query to display the fields restaurant_id, name, borough and cuisine,
+but exclude the field _id for all the documents in the collection restaurant.
+
+ * Restaurant> db.restaurants.find({},{_id:0,restaurant_id:1,name:1,borough:1,cuisine:1})
+ 
+ 4. Write a MongoDB query to display the fields restaurant_id, name, borough and zip code,
+but exclude the field _id for all the documents in the collection restaurant.
+
+ * Restaurant> db.restaurants.find({},{_id:0,restaurant_id:1,name:1,borough:1,"address.zipcode":1})
+ 
+ 5. Write a MongoDB query to display all the restaurant which is in the borough Bronx.
+ 
+  * Restaurant> db.restaurants.find({borough:'Bronx'})
+  
+ 6. Write a MongoDB query to display the first 5 restaurant which is in the borough Bronx.
+ 
+  * Restaurant> db.restaurants.find({borough:'Bronx'}).limit(5);
+  
+ 7.Write a MongoDB query to display the next 5 restaurants after skipping first 5 which are in
+  the borough Bronx.
+  
+  * Restaurant> db.restaurants.find({borough:'Bronx'}).limit(5);
+  
+ 8. Write a MongoDB query to find the restaurants who achieved a score more than 90.
+ 
+  * Restaurant> db.restaurants.find({"grades.score":{$gt:90}});
+  
+  9. Write a MongoDB query to find the restaurants that achieved a score, more than 80 but less
+than 100.
+
+ *  Restaurant> db.restaurants.find({$and:[{"grades.score":{$gt:80}},{"grades.score":{$lt:100}}]})
+ 
+ 
+ 10. Write a MongoDB query to find the restaurants which locate in latitude value less than -
+95.754168.
+
+ * Restaurant> db.restaurants.find({"address.coord":{$lt:-95.754168}},{"address.coord":{$slice:1}})
+ 
+ 11. Write a MongoDB query to find the restaurants that do not prepare any cuisine of
+'American' and their grade score more than 70 and latitude less than -65.754168
+
+ * Restaurant> db.restaurants.find(  {cuisine:{$ne:'American '}, "grades.score":{$gt:70}, "address.coord":{$lt:-65.754168}}, {"address.coord":{$slice:1}} );
+ 
+ 12. Write a MongoDB query to find the restaurants which do not prepare any cuisine of
+'American' and achieved a score more than 70 and located in the longitude less than -
+65.754168.
+Note : Do this query without using $and operator.
+
+ * Restaurant> db.restaurants.find(  {cuisine:{$ne:'American '}, "grades.score":{$gt:70}, "address.coord":{$lt:-65.754168}}, {"address.coord":{$slice:[1,1]}} );
+ 
+ 13. Write a MongoDB query to find the restaurants which do not prepare any cuisine of
+'American' and achieved a grade point 'A' not belongs to the borough Brooklyn. The
+document must be displayed according to the cuisine in descending order.
+
+ * Restaurant> db.restaurants.find({cuisine:{$ne:"American "}, "grades.grade":"A","borough":{$ne:"Brooklyn"}}).sort({cuisine:-1});
+ 
+ 
+
+14. Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those
+restaurants which contain 'Wil' as first three letters for its name.
+
+ * Restaurant> db.restaurants.find({ "name": /^Wil/ },{ "restaurant_id": 1, "name": 1, "borough": 1, "cuisine": 1 })
+
+
+15. Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those
+restaurants which contain 'ces' as last three letters for its name.
+
+ * 
+
+16. Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those
+restaurants which contain 'Reg' as three letters somewhere in its name.
+
+ *
+
+17. Write a MongoDB query to find the restaurants which belong to the borough Bronx and
+prepared either American or Chinese dish.
+
+ *
+
+18. Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those
+restaurants which belong to the borough Staten Island or Queens or Bronxor Brooklyn.
+
+ * Restaurant> db.restaurants.find({ borough: {$in: ["Staten Island", "Queens", "Bronx", "Brooklyn"] } },{ restaurant_id: 1, name: 1, borough: 1, cuisine: 1, _id: 0 })
+
+19. Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those
+restaurants which are not belonging to the borough Staten Island or Queens or Bronxor
+Brooklyn.
+
+ * Restaurant> db.restaurants.find({ borough: { $nin: ["Staten Island", "Queens", "Bronx", "Brooklyn"] }},{ restaurant_id: 1, name: 1, borough: 1, cuisine: 1, _id: 0 })
+
+20. Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those
+restaurants which achieved a score which is not more than 10.
+
+ * Restaurant> db.restaurants.find({"grades.score":{$lt:10}},{restaurant_id:1,name: 1, borough: 1, cuisine: 1, _id: 0 })
+
+21. Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those
+restaurants which prepared dish except 'American' and 'Chinees' or restaurant's name begins
+with letter 'Wil'.
+
+ * Restaurant> db.restaurants.find({ cuisine: { $nin: ["American", "Chinese"] } }, { restaurant_id: 1, name: 1, borough: 1, cuisine: 1, _id: 0 })
+
+22. Write a MongoDB query to find the restaurant Id, name, and grades for those restaurants
+which achieved a grade of "A" and scored 11 on an ISODate "2014-08-11T00:00:00Z"
+among many of survey dates..
+
+ * Restaurant> db.restaurants.find( { grades: { $elemMatch: { grade: "A", score: 11, date: ISODate("2014-08-11T00:00:00Z") } } }, { restaurant_id: 1, name: 1, grades: 1, _id: 0 })
+
+23. Write a MongoDB query to find the restaurant Id, name and grades for those restaurants
+where the 2nd element of grades array contains a grade of "A" and score 9 on an ISODate
+"2014-08-11T00:00:00Z".
+
+ * Restaurant> db.restaurants.find({"grades.1.grade": "A","grades.1.score": 9,"grades.1.date": ISODate("2014-08-11T00:00:00Z")},{ restaurant_id: 1, name: 1, grades: 1, _id: 0 })
+
+
+24. Write a MongoDB query to find the restaurant Id, name, address and geographical
+location for those restaurants where 2nd element of coord array contains a value which is
+more than 42 and upto 52..
+
+ * Restaurant> db.restaurants.find({ "address.coord.1": { $gt: 42, $lt: 52 } },{ restaurant_id: 1, name: 1, "address.coord": 1, _id: 0 })
+
+25. Write a MongoDB query to arrange the name of the restaurants in ascending order along
+with all the columns.
+
+ * Restaurant>  db.restaurants.find().sort({name:1})
+
+26. Write a MongoDB query to arrange the name of the restaurants in descending along with
+all the columns.
+
+ * Restaurant> db.restaurants.find().sort({name:-1})
+
+27. Write a MongoDB query to arranged the name of the cuisine in ascending order and for
+that same cuisine borough should be in descending order.
+
+ * Restaurant> db.restaurants.find().sort({ cuisine: 1, borough: -1 })
+
+28. Write a MongoDB query to know whether all the addresses contains the street or not.
+
+ * Restaurant> 
+
+29. Write a MongoDB query which will select all documents in the restaurants collection
+where the coord field value is Double.
+
+ * Restaurant> db.restaurants.find({ "address.coord": { $type: "double" } })
+
+30. Write a MongoDB query which will select the restaurant Id, name and grades for those
+restaurants which returns 0 as a remainder after dividing the score by 7.
+
+ * Restaurant> db.restaurants.find({ "grades.score": { $mod: [7, 0] } }, { restaurant_id: 1, name: 1, grades: 1, _id: 0 })
+
+31. Write a MongoDB query to find the restaurant name, borough, longitude and attitude and
+cuisine for those restaurants which contains 'mon' as three letters somewhere in its name.
+
+ * Restaurant>
+
+32. Write a MongoDB query to find the restaurant name, borough, longitude and latitude and
+cuisine for those restaurants which contain 'Mad' as first three letters of its name.
+
+ * Restaurant>
+
+33. Write a MongoDB query to find the restaurants that have at least one grade with a score
+of less than 5.
+
+ * Restaurant>db.restaurants.find({ "grades": { $elemMatch: { "score": { $lt: 5 } } } },{ restaurant_id: 1, name: 1, grades: 1, _id: 0 })
+
+34. Write a MongoDB query to find the restaurants that have at least one grade with a score
+of less than 5 and that are located in the borough of Manhattan.
+
+ * Restaurant> db.restaurants.find({ "borough": "Manhattan", "grades": { $elemMatch: { "score":{ $lt: 5 } } } },{ restaurant_id: 1, name: 1, borough: 1, grades: 1, _id: 0 })
+
+
+35. Write a MongoDB query to find the restaurants that have at least one grade with a score
+of less than 5 and that are located in the borough of Manhattan or Brooklyn.
+
+ * Restaurant> db.restaurants.find({ "borough": { $in: ["Manhattan", "Brooklyn"] }, "grades":{ $elemMatch: { "score": { $lt: 5 } } } },{ restaurant_id: 1, name: 1, borough: 1, grades: 1, _id: 0 })
+
+36. Write a MongoDB query to find the restaurants that have at least one grade with a score
+of less than 5 and that are located in the borough of Manhattan or Brooklyn, and their cuisine
+is not American.
+
+ * Restaurant> db.restaurants.find({"borough":{$in:["Manhattan","Brooklyn"]},"grades":{$elemMatch:{"score":{$lt:5}}},"cuisine":{$ne:"American"}},{restaurant_id: 1, name: 1, borough: 1, cuisine: 1, grades: 1, _id: 0 })
+
+37. Write a MongoDB query to find the restaurants that have at least one grade with a score
+of less than 5 and that are located in the borough of Manhattan or Brooklyn, and their cuisine
+is not American or Chinese.
+
+ * Restaurant>db.restaurants.find({ "borough": { $in: ["Manhattan", "Brooklyn"] }, "grades": { $elemMatch: { "score": { $lt: 5 } } }, "cuisine": { $nin: ["American","Chinese"]{ restaurant_id:1, name: 1, borough: 1, cuisine: 1, grades: 1, _id: 0 })
+
+
+38. Write a MongoDB query to find the restaurants that have a grade with a score of 2 and a
+grade with a score of 6.
+
+ * Restaurant> db.restaurants.find({$and: [{ "grades": { $elemMatch: { "score": 2 } } },{ "grades": { $elemMatch: { "score": 6 } } }]}, { restaurant_id: 1, name: 1, grades: 1, _id: 0 })
+
+
+39. Write a MongoDB query to find the restaurants that have a grade with a score of 2 and a
+grade with a score of 6 and are located in the borough of Manhattan.
+
+ * Restaurant> db.restaurants.find(
+...   {
+...     $and: [
+...       { "grades": { $elemMatch: { "score": 2 } } },
+...       { "grades": { $elemMatch: { "score": 6 } } },
+...       { "borough": "Manhattan" }
+...     ]
+...   },
+...   { restaurant_id: 1, name: 1, borough: 1, grades: 1, _id: 0 }
+... )
+
+40. Write a MongoDB query to find the restaurants that have a grade with a score of 2 and a
+grade with a score of 6 and are located in the borough of Manhattan or Brooklyn.
+
+ * Restaurant> db.restaurants.find(
+... {$and:[
+... {"grades":{$elemMatch:{"score":2}}},
+... {"grades":{$elemMatch:{"score":6}}},
+... {"borough":{$in:["Manhattan","Brooklyn"]}}
+... ]},
+... {restaurant_id:1,name:1,borough:1,grades:1,_id:0})
+
+41. Write a MongoDB query to find the restaurants that have a grade with a score of 2 and a
+grade with a score of 6 and are located in the borough of Manhattan or Brooklyn, and their
+cuisine is not American.
+
+ * Restaurant> db.restaurants.find( { $and: [ { "grades": { $elemMatch: { "score": 2 } } }, { "grades": { $elemMatch: { "score": 6 } } }, { "borough": { $in: ["Manhattan", "Brooklyn"] } },{cuisine:{$ne:"American"}}] }, { restaurant_id: 1, name: 1, borough: 1, grades: 1, _id: 0 })
+
+
+42. Write a MongoDB query to find the restaurants that have a grade with a score of 2 and a
+grade with a score of 6 and are located in the borough of Manhattan or Brooklyn, and their
+cuisine is not American or Chinese.
+
+ * Restaurant> db.restaurants.find( { $and: [ { "grades": { $elemMatch: { "score": 2 } } }, { "grades": { $elemMatch: { "score": 6 } } }, { "borough": { $in: ["Manhattan", "Brooklyn"] } },{cuisine:{$nin:["American","Chinese"]}}] }, { restaurant_id: 1, name: 1, borough: 1, grades: 1, _id: 0 })
+
+
+43. Write a MongoDB query to find the restaurants that have a grade with a score of 2 or a
+grade with a score of 6.
+
+ * Restaurant> db.restaurants.find(
+...   {
+...   $or: [
+...   { "grades": { $elemMatch: { "score": 2 } } },
+...   { "grades": { $elemMatch: { "score": 6 } } }
+...   ]
+...   })
+
+
+44. Write a MongoDB query to find the restaurants that have a grade with a score of 2 or a
+grade with a score of 6 and are located in the borough of Manhattan.
+
+ * Restaurant> db.restaurants.find({$and: [{ "borough": "Manhattan" },$or: [{ "grades": { $elemMatch: { "score": 2 } } },{ "grades": { $elemMatch: { "score": 6 } } ]}]})
+
+45. Write a MongoDB query to find the restaurants that have a grade with a score of 2 or a
+grade with a score of 6 and are located in the borough of Manhattan or Brooklyn.
+
+ * Restaurant> db.restaurants.find({$or: [{ "borough": "Manhattan","Brookyln" },{$or: [{ "grades": { $elemMatch: { "score": 2 } } },{ "grades": { $elemMatch: { "score": 6 } } ]}]})
+
+46. Write a MongoDB query to find the restaurants that have a grade with a score of 2 or a
+grade with a score of 6 and are located in the borough of Manhattan or Brooklyn, and their
+cuisine is not American.
+
+ * Restaurant> db.restaurants.find({$and:[{"borough":{$in: ["Manhattan", "Brooklyn"]}},{$or: [{ "grades": { $elemMatch: { "score": 2 } } },{ "grades":{ $elemMatch:{"score":6}}}]}]},{ restaurant_id: 1, name: 1, borough: 1, cuisine: 1, grades: 1, _id: 0 })
+
+
+47. Write a MongoDB query to find the restaurants that have a grade with a score of 2 or a
+grade with a score of 6 and are located in the borough of Manhattan or Brooklyn, and their
+cuisine is not American or Chinese.
+
+ * Restaurant> db.restaurants.find({$and:[{"borough": { $in: ["Manhattan", "Brooklyn"] } },{"cuisine": { $nin: ["American", "Chinese"] } },{$or: [{ "grades": { $elemMatch: { "score": 2 } } },{ "grades": { $elemMatch: { "score": 6 } }]}]})
+
+
+48. Write a MongoDB query to find the restaurants that have all grades with a score greater
+than 5.
+
+ * Restaurant> db.restaurants.find({
+...     "grades.score": { $not: { $lte: 5 } }
+...   })
+
+
+49. Write a MongoDB query to find the restaurants that have all grades with a score greater
+than 5 and are located in the borough of Manhattan.
+
+ * Restaurant> db.restaurants.find({$and:[{"borough": "Manhattan" },{"grades.score":{$not:{$lte: 5}}}]})
+
+50. Write a MongoDB query to find the restaurants that have all grades with a score greater
+than 5 and are located in the borough of Manhattan or Brooklyn.
+
+ * Restaurant> db.restaurants.find({$and:[{"borough":{$in:["Manhattan","Brooklyn"]}},{"grades.score":{$not:{$lte:5}}}]})
+
+51. Write a MongoDB query to find the average score for each restaurant.
+
+ * Restaurant> 
+
+52. Write a MongoDB query to find the highest score for each restaurant.
+
+ * Restaurant> 
+
+53. Write a MongoDB query to find the lowest score for each restaurant.
+
+ * Restaurant> 
+
+54. Write a MongoDB query to find the count of restaurants in each borough.
+
+ * Restaurant> 
+
+55. Write a MongoDB query to find the count of restaurants for each cuisine.
+
+ * Restaurant> 
+
+56. Write a MongoDB query to find the count of restaurants for each cuisine and borough.
+
+ * Restaurant> 
+
+57. Write a MongoDB query to find the count of restaurants that received a grade of 'A' for
+each cuisine.
+
+ * Restaurant> 
+
+58. Write a MongoDB query to find the count of restaurants that received a grade of 'A' for
+each borough.
+
+ * Restaurant> 
+
+59. Write a MongoDB query to find the count of restaurants that received a grade of 'A' for
+each cuisine and borough.
+
+ * Restaurant> 
+
+60. Write a MongoDB query to find the number of restaurants that have been graded in each
+month of the year.
+
+ * Restaurant> 
+
+61. Write a MongoDB query to find the average score for each cuisine.
+
+ * Restaurant> 
+
+62. Write a MongoDB query to find the highest score for each cuisine.
+
+ * Restaurant> 
+
+63. Write a MongoDB query to find the lowest score for each cuisine.
+
+ * Restaurant> 
+
+64. Write a MongoDB query to find the average score for each borough.
+
+ * Restaurant> 
+
+65. Write a MongoDB query to find the highest score for each borough.
+
+
+
+66. Write a MongoDB query to find the lowest score for each borough.
+
+
+
+67. Write a MongoDB query to find the name and address of the restaurants that received a
+grade of 'A' on a specific date.
+68. Write a MongoDB query to find the name and address of the restaurants that received a
+grade of 'B' or 'C' on a specific date.
+69. Write a MongoDB query to find the name and address of the restaurants that have at least
+one 'A' grade and one 'B' grade.
+70. Write a MongoDB query to find the name and address of the restaurants that have at least
+one 'A' grade and no 'B' grades.
+71. Write a MongoDB query to find the name ,address and grades of the restaurants that have
+at least one 'A' grade and no 'C' grades.
+72. Write a MongoDB query to find the name, address, and grades of the restaurants that have
+at least one 'A' grade, no 'B' grades, and no 'C' grades.
+73. Write a MongoDB query to find the name and address of the restaurants that have the
+word 'coffee' in their name.
+74. Write a MongoDB query to find the name and address of the restaurants that have a
+zipcode that starts with '10'.
+75. Write a MongoDB query to find the name and address of the restaurants that have a
+cuisine that starts with the letter 'B'.
+76. Write a MongoDB query to find the name, address, and cuisine of the restaurants that
+have a cuisine that ends with the letter 'y'.
+77. Write a MongoDB query to find the name, address, and cuisine of the restaurants that
+have a cuisine that contains the word 'Pizza'.
+78. Write a MongoDB query to find the restaurants achieved highest average score.
+79. Write a MongoDB query to find all the restaurants with the highest number of "A" grades.
+80. Write a MongoDB query to find the cuisine type that is most likely to receive a "C" grade.
+81. Write a MongoDB query to find the restaurant that has the highest average score for
+thecuisine "Turkish".
+82. Write a MongoDB query to find the restaurants that achieved the highest total score.
+83. Write a MongoDB query to find all the Chinese restaurants in Brooklyn.
+84. Write a MongoDB query to find the restaurant with the most recent grade date.
+85. Write a MongoDB query to find the top 5 restaurants with the highest average score for
+each cuisine type, along with their average scores.
+86. Write a MongoDB query to find the top 5 restaurants in each borough with the highest
+number of "A" grades.
+87. Write a MongoDB query to find the borough with the highest number of restaurants that
+have a grade of "A" and a score greater than or equal to 90.
