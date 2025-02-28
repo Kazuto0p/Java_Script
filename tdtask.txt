@@ -383,7 +383,7 @@ month of the year.
 
 61. Write a MongoDB query to find the average score for each cuisine.
 
-Ans :
+
 db.restaurants.aggregate([
 { $unwind: "$grades" },
 { $group: { _id: "$cuisine", avgScore: { $avg: "$grades.score" } } }
@@ -399,7 +399,6 @@ db.restaurants.aggregate([
 
 63. Write a MongoDB query to find the lowest score for each cuisine.
 
-Ans :
 db.restaurants.aggregate([
 { $unwind: "$grades" },
 { $group: { _id: "$cuisine", lowestScore: { $min: "$grades.score" } } }
@@ -407,7 +406,7 @@ db.restaurants.aggregate([
 
 64. Write a MongoDB query to find the average score for each borough.
 
-Ans :
+
 db.restaurants.aggregate([
 { $unwind: "$grades" },
 { $group: { _id: "$borough", avgScore: { $avg: "$grades.score" } } }
@@ -417,7 +416,7 @@ db.restaurants.aggregate([
 
 65. Write a MongoDB query to find the highest score for each borough.
 
-Ans :
+
 db.restaurants.aggregate([
 { $unwind: "$grades" },
 { $group: { _id: "$borough", highestScore: { $max: "$grades.score" } } }
@@ -433,7 +432,7 @@ db.restaurants.aggregate([
 67. Write a MongoDB query to find the name and address of the restaurants that received a grade of 'A' on a
 specific date.
 
-Ans :
+
 db.restaurants.find({ "grades": { $elemMatch: { "grade": "A", "date": ISODate("YYYY-MM-DD") } } }, {
 name: 1, address: 1, _id: 0 })
 
@@ -448,26 +447,23 @@ and one 'B' grade.
 
 
 
-Ans :
+
 db.restaurants.find({ "grades.grade": { $all: ["A", "B"] } }, { name: 1, address: 1, _id: 0 })
 
 70. Write a MongoDB query to find the name and address of the restaurants that have at least one 'A' grade
 and no 'B' grades.
 
-Ans :
 db.restaurants.find({ "grades.grade": "A", "grades.grade": { $ne: "B" } }, { name: 1, address: 1, _id: 0 })
 
 71. Write a MongoDB query to find the name, address, and grades of the restaurants that have at least one 'A'
 grade and no 'C' grades.
 
-Ans :
 db.restaurants.find({ "grades.grade": "A", "grades.grade": { $ne: "C" } }, { name: 1, address: 1, grades: 1,
 _id: 0 })
 
 72. Write a MongoDB query to find the name, address, and grades of the restaurants that have at least one 'A'
 grade, no 'B' grades, and no 'C' grades.
 
-Ans :
 db.restaurants.find({ "grades.grade": "A", "grades.grade": { $nin: ["B", "C"] } }, { name: 1, address: 1,
 grades: 1, _id: 0 })
 
