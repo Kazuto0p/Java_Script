@@ -384,15 +384,16 @@ month of the year.
 61. Write a MongoDB query to find the average score for each cuisine.
 
 
-db.restaurants.aggregate([
+
+ * Restaurant> db.restaurants.aggregate([
 { $unwind: "$grades" },
 { $group: { _id: "$cuisine", avgScore: { $avg: "$grades.score" } } }
 ])
 
 62. Write a MongoDB query to find the highest score for each cuisine.
 
-Ans :
-db.restaurants.aggregate([
+
+ * Restaurant> db.restaurants.aggregate([
 { $unwind: "$grades" },
 { $group: { _id: "$cuisine", highestScore: { $max: "$grades.score" } } }
 ])
