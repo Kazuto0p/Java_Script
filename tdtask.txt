@@ -425,7 +425,7 @@ db.restaurants.aggregate([
 
 66. Write a MongoDB query to find the lowest score for each borough.
 
-Ans :
+ * Restaurant> 
 db.restaurants.aggregate([
 { $unwind: "$grades" },
 { $group: { _id: "$borough", lowestScore: { $min: "$grades.score" } } }
@@ -434,14 +434,14 @@ db.restaurants.aggregate([
 specific date.
 
 
-db.restaurants.find({ "grades": { $elemMatch: { "grade": "A", "date": ISODate("YYYY-MM-DD") } } }, {
+ * Restaurant> db.restaurants.find({ "grades": { $elemMatch: { "grade": "A", "date": ISODate("YYYY-MM-DD") } } }, {
 name: 1, address: 1, _id: 0 })
 
 68. Write a MongoDB query to find the name and address of the restaurants that received a grade of 'B' or 'C'
 on a specific date.
 
-Ans :
-db.restaurants.find({ "grades": { $elemMatch: { "grade": { $in: ["B", "C"] }, "date": ISODate("YYYY-MMDD") } } }, { name: 1, address: 1, _id: 0 })
+
+ * Restaurant> db.restaurants.find({ "grades": { $elemMatch: { "grade": { $in: ["B", "C"] }, "date": ISODate("YYYY-MMDD") } } }, { name: 1, address: 1, _id: 0 })
 
 69. Write a MongoDB query to find the name and address of the restaurants that have at least one 'A' grade
 and one 'B' grade.
@@ -449,23 +449,23 @@ and one 'B' grade.
 
 
 
-db.restaurants.find({ "grades.grade": { $all: ["A", "B"] } }, { name: 1, address: 1, _id: 0 })
+ * Restaurant> db.restaurants.find({ "grades.grade": { $all: ["A", "B"] } }, { name: 1, address: 1, _id: 0 })
 
 70. Write a MongoDB query to find the name and address of the restaurants that have at least one 'A' grade
 and no 'B' grades.
 
-db.restaurants.find({ "grades.grade": "A", "grades.grade": { $ne: "B" } }, { name: 1, address: 1, _id: 0 })
+ * Restaurant> db.restaurants.find({ "grades.grade": "A", "grades.grade": { $ne: "B" } }, { name: 1, address: 1, _id: 0 })
 
 71. Write a MongoDB query to find the name, address, and grades of the restaurants that have at least one 'A'
 grade and no 'C' grades.
 
-db.restaurants.find({ "grades.grade": "A", "grades.grade": { $ne: "C" } }, { name: 1, address: 1, grades: 1,
+ * Restaurant> db.restaurants.find({ "grades.grade": "A", "grades.grade": { $ne: "C" } }, { name: 1, address: 1, grades: 1,
 _id: 0 })
 
 72. Write a MongoDB query to find the name, address, and grades of the restaurants that have at least one 'A'
 grade, no 'B' grades, and no 'C' grades.
 
-db.restaurants.find({ "grades.grade": "A", "grades.grade": { $nin: ["B", "C"] } }, { name: 1, address: 1,
+ * Restaurant> db.restaurants.find({ "grades.grade": "A", "grades.grade": { $nin: ["B", "C"] } }, { name: 1, address: 1,
 grades: 1, _id: 0 })
 
 73. Write a MongoDB query to find the name and address of the restaurants that have the word 'coffee' in
