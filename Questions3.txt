@@ -77,3 +77,10 @@ Ans : db.movies.find({ "awards": { "$regex": "Won" } }, { "title": 1, "year": 1,
 
 26. Write a query in MongoDB to find the movie with the highest IMDb rating and viewer rating on Tomatoes from the 'movies' collection.  
 Ans : db.movies.find({}, { "title": 1, "imdb.rating": 1, "tomatoes.viewer.rating": 1 }).sort({ "imdb.rating": -1, "tomatoes.viewer.rating": -1 }).limit(1)  
+
+27. Write a query in MongoDB to find the oldest movie with an award win from the 'movies' collection.  
+Ans : db.movies.find({ "awards": { "$regex": "Won" } }, { "title": 1, "year": 1, "awards": 1 }).sort({ "year": 1 }).limit(1)  
+
+28. Write a query in MongoDB to find the movie with the highest IMDb rating and viewer rating on Tomatoes from the 'movies' collection.  
+Ans : db.movies.find({}, { "title": 1, "imdb.rating": 1, "tomatoes.viewer.rating": 1 }).sort({ "imdb.rating": -1, "tomatoes.viewer.rating": -1 }).limit(1)  
+
