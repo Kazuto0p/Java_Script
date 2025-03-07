@@ -1,0 +1,19 @@
+
+a = [1,2,3,4,5]
+// a.forEach((item,index,arr) => {
+//     arr[index]=item*item
+// });
+// console.log(a)
+
+
+// s=a.length-1;
+// b=[]
+// a.forEach((item,index,arr)=>{
+        
+//         b.push(arr[s]);
+//         s--
+// })
+// console.log(b);
+
+a.forEach(item=> a[1]=90)
+console.log(a);
