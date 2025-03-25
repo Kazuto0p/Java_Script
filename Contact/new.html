@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Input Data</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .card {
+            width: 300px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div>
+        <label for="name">Name :</label>
+        <input type="text" id="name">
+        <br>
+        <label for="num">Number :</label>
+        <input type="text" id="num">
+        <br>
+        <button id="btn">Save Data</button>
+        <button id="retrieveBtn">Retrieve Data</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('btn').addEventListener('click', () => {
+            const name = document.getElementById('name').value;
+            const number = document.getElementById('num').value;
+
+            // Save data to localStorage
+            const data = { name, number };
+            localStorage.setItem('userData', JSON.stringify(data));
+
+            alert('Data saved to localStorage!');
+        });
+
+        document.getElementById('retrieveBtn').addEventListener('click', () => {
+            const storedData = localStorage.getItem('userData');
+            if (storedData) {
+                const { name, number } = JSON.parse(storedData);
+                alert(`Name: ${name}, Number: ${number}`);
+            } else {
+                alert('No data found!');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Book</title>
+    <style>
+
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .card {
+            margin-top: 10%;
+            width: 380px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            position: relative; /* Make the card's position relative */
+        }
+
+        #ps {
+            width: 50px;
+            height: 50px;
+            background-color: orange;
+            border-radius: 50%;
+            text-align: center;
+            position: absolute;
+            bottom: 10px; 
+            right: 10px;
+            cursor: pointer;
+        }
+
+        #ps h1 {
+            margin: 0;
+            font-size: 35px;
+            color: aliceblue;
+            line-height: 50px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+        .sm {
+            width: 60%;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(194, 191, 191, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="m1">
+
+        <div class="card">
+            <h2>Contact Book</h2>
+            
+            <div class="sm">
+                test <br>
+                test <br>
+                test <br>
+                test <br>
+                test <br>
+                test <br>
+                test <br>
+            </div>
+            <br>
+            <a href="card.html">
+                <div id="ps">
+                    <h1>+</h1>
+                </div>
+            </a>
+        </div>
+    </div>
+    <script src="new.js"></script>
+</body>
+</html>
