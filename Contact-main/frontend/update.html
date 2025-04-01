@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Contact</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ff4800; /* Light Orange Background */
+            background-image: linear-gradient(to bottom, #ff5100, #FFA500); /* Light gradient from yellow to orange */
+        }
+        .container {
+            width: 300px;
+            background: white;
+            padding: 45px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background:#28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Update Contact</h2>
+        <form id="updateForm">
+            <input type="hidden" id="contactId">
+            <input type="text" id="name" placeholder="Enter Name">
+            <input type="text" id="phone" placeholder="Enter Phone Number">
+            <button type="submit">Update</button>
+        </form>
+    </div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const contactId = params.get("id");
+
+        async function fetchContact() {
+            if (!contactId) return alert("No contact ID provided!");
+            try {
+                const res = await fetch(`http://localhost:8000/getdata/${contactId}`);
+                if (!res.ok) throw new Error("Failed to fetch contact");
+                
+                const contact = await res.json();
+                document.getElementById("contactId").value = contact._id;
+                document.getElementById("name").value = contact.name;
+                document.getElementById("phone").value = contact.phone;
+            } catch (error) {
+                console.error("Error fetching contact:", error);
+                alert("Failed to load contact details.");
+            }
+        }
+        fetchContact();
+
+        document.getElementById("updateForm").addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const id = document.getElementById("contactId").value;
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+
+            if (!name || !phone) {
+                alert("Both name and phone number are required.");
+                return;
+            }
+
+            try {
+                const res = await fetch(`http://localhost:8000/update/${id}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, phone })
+                });
+
+                const result = await res.json();
+                if (res.ok) {
+                    alert(result.message);
+                    window.location.href = "/";
+                } else {
+                    throw new Error(result.error || "Failed to update contact");
+                }
+            } catch (error) {
+                console.error("Error updating contact:", error);
+                alert("An error occurred while updating the contact.");
+            }
+        });
+    </script>
+</body>
+</html>

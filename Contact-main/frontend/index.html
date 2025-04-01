@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* background-color: #f4f4f4; */
+            background-color: #ff4800; /* Light Orange Background */
+            background-image: linear-gradient(to bottom, #ff5100, #FFA500); /* Light gradient from yellow to orange */
+        }
+        .container {
+            width: 350px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .contact {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #eee;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            position: relative;
+
+            background-color: #4B0082;
+            color: white;
+            font-weight: bolder;
+            background-image: linear-gradient(to bottom right, #7a0082, #00ffff);
+        }
+        .menu {
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 40px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            padding: 5px;
+            z-index: 1000;
+        }
+        .menu button {
+            display: block;
+            background: none;
+            border: none;
+            padding: 8px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+        .menu button:hover {
+            background: #ddd;
+        }
+        .add-button {
+            margin-top: 10px;
+            /* background: #28a745; */
+            background: #192abd;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        #btn{
+            background-color: transparent;
+            border: none;
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Contacts</h2>
+        <div id="contact-list">
+            <div class="contact">
+                <!-- <span>John Doe</p> -->
+                <button onclick="toggleMenu(this)">⋮</button>
+                <div class="menu">
+                    <button onclick="editContact(this)">Edit</button>
+                    <button onclick="deleteContact(this)">Delete</button>
+                </div>
+            </div>
+            <div class="contact">
+                <span>Jane Doe</span>
+                <button onclick="toggleMenu(this)">⋮</button>
+                <div class="menu">
+                    <button onclick="editContact(this)">Edit</button>
+                    <button onclick="deleteContact(this)">Delete</button>
+                </div>
+            </div>
+        </div>
+        <button class="add-button" onclick="window.location.href='http://localhost:8000/add'">+</button>
+    </div>
+    <script>
+        async function fetchContacts() {
+            try {
+                const res = await fetch("http://localhost:8000/getdata");
+                const data = await res.json();
+    
+                const contactList = document.getElementById("contact-list");
+                contactList.innerHTML = "";
+    
+                data.forEach(contact => {
+                    let contactDiv = document.createElement("div");
+                    contactDiv.classList.add("contact");
+    
+                    contactDiv.innerHTML = `
+                        <p> Name : ${contact.name}</p> 
+                        <p> Phone: ${contact.phone} </p>
+                        <button id="btn" onclick="toggleMenu(this)">⋮</button>
+                        <div class="menu">
+                            <button   onclick="editContact('${contact._id}')">Edit</button>
+                            <button onclick="deleteContact('${contact._id}', this)">Delete</button>
+                        </div>
+                    `;
+    
+                    contactList.appendChild(contactDiv);
+                });
+            } catch (error) {
+                console.log("Error fetching contacts:", error);
+            }
+        }
+    
+        function toggleMenu(button) {
+            let menu = button.nextElementSibling;
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+    
+        async function deleteContact(id, button) {
+            try {
+                const res = await fetch(`http://localhost:8000/delete/${id}`, { method: "DELETE" });
+                if (res.ok) {
+                    button.closest(".contact").remove();
+                }
+            } catch (error) {
+                console.error("Error deleting contact:", error);
+            }
+        }
+    
+        function editContact(id) {
+            window.location.href = `http://localhost:8000/update.html?id=${id}`;
+        }
+
+    
+        
+        fetchContacts();
+
+        async function getData() {
+            try {
+                const res = await fetch("http://localhost:8000/getdata");
+                const data = await res.json();
+                console.log("Fetched Data", data);
+            } catch (error) {
+                console.log("Error fetching data:", error);
+            }
+        }
+        getData();
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Contact</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body style="background-color: peachpuff;">
+    <div class="container">
+        <h2>Add Contact</h2>
+        <form id="addContactForm" action="/submit" method="post" onsubmit="return validateForm(event)">
+            <input type="text" id="name" name="name" placeholder="Enter Name" required>
+            <input type="text" id="phone" name="phone" placeholder="Enter Phone Number" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+
+        function validateForm(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const nameRegex = /.{1,}/;
+            const phoneRegex = /^\d{1,12}$/;
+
+            if (!nameRegex.test(name)) {
+                alert("Please enter a valid name (greater than 0 characters).");
+                return false;
+            }
+
+            if (!phoneRegex.test(phone)) {
+                alert("Please enter a valid phone number (only digits, max length of 12).");
+                return false;
+            }
+            document.getElementById("addContactForm").submit();
+            return true;
+        }
+    </script>
+</body>
+
+</html>
