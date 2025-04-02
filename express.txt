@@ -1,0 +1,158 @@
+Alright, let’s get you up to speed with **Express.js** in **10 minutes!** 🚀  
+
+---
+
+## 1️⃣ What is Express.js?  
+Express.js is a **minimal and fast web framework** for **Node.js** that simplifies handling routes, middleware, and APIs.  
+
+📌 **Why use Express.js?**  
+✔ Easy to set up  
+✔ Handles routing & middleware efficiently  
+✔ Makes backend development faster  
+
+---
+
+## 2️⃣ Install Express.js  
+
+First, make sure you have **Node.js** installed.  
+Now, create a project and install Express:  
+
+```sh
+mkdir express-app && cd express-app
+npm init -y  # Creates a package.json file
+npm install express  # Installs Express.js
+```
+
+---
+
+## 3️⃣ Create a Simple Server  
+
+Create a file **server.js** and add this code:  
+
+```js
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello, Express!");
+});
+
+app.listen(3000, () => {
+  console.log("Server running at http://localhost:3000");
+});
+```
+
+🔹 **Run the server:**  
+```sh
+node server.js
+```
+✅ Open `http://localhost:3000` in your browser.
+
+---
+
+## 4️⃣ Handling Routes  
+
+```js
+app.get("/about", (req, res) => {
+  res.send("This is the About Page");
+});
+```
+Try `http://localhost:3000/about` in your browser.  
+
+---
+
+## 5️⃣ Middleware (For Parsing JSON & Logging)  
+
+```js
+app.use(express.json()); // Parses JSON request bodies
+
+app.use((req, res, next) => {
+  console.log(`${req.method} request to ${req.url}`);
+  next();
+});
+```
+
+---
+
+## 6️⃣ Handling POST Requests  
+
+```js
+app.post("/user", (req, res) => {
+  res.send(`Hello, ${req.body.name}!`);
+});
+```
+✅ Test it using **Postman** or `curl`:  
+
+```sh
+curl -X POST http://localhost:3000/user -H "Content-Type: application/json" -d '{"name":"Althaf"}'
+```
+
+---
+
+## 7️⃣ Dynamic Routes (Route Parameters)  
+
+```js
+app.get("/user/:id", (req, res) => {
+  res.send(`User ID: ${req.params.id}`);
+});
+```
+Try `http://localhost:3000/user/123` in your browser.
+
+---
+
+## 8️⃣ Using Express Router (Modular Routing)  
+
+Create a **routes.js** file:
+
+```js
+const express = require("express");
+const router = express.Router();
+
+router.get("/", (req, res) => res.send("Home Page"));
+router.get("/contact", (req, res) => res.send("Contact Page"));
+
+module.exports = router;
+```
+Now, import and use it in **server.js**:
+
+```js
+const routes = require("./routes");
+app.use("/", routes);
+```
+
+---
+
+## 9️⃣ Serving Static Files  
+
+Put an `index.html` inside a folder named **public**. Then, serve it:
+
+```js
+app.use(express.static("public"));
+```
+Now visit `http://localhost:3000/index.html` 🚀
+
+---
+
+## 🔟 Connect to MongoDB (Bonus)  
+
+Install **mongoose**:  
+```sh
+npm install mongoose
+```
+
+Connect to **MongoDB** in `server.js`:  
+
+```js
+const mongoose = require("mongoose");
+
+mongoose
+  .connect("mongodb://localhost:27017/mydb")
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.log(err));
+```
+
+---
+
+🎉 **You now know Express.js basics!** 🔥 Want to go deeper? Learn **authentication, validation, and deployment** next.  
+
+Let me know if you need more details! 🚀
