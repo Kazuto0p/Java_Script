@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Users</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 60%;
+        margin: 20px auto;
+      }
+
+      th,
+      td {
+        border: 1px solid #aaa;
+        padding: 8px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2 style="text-align: center">User List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Tax</th>
+          <th>Tax Edit</th>
+        </tr>
+      </thead>
+      <tbody id="userTableBody">
+        <!-- Rows will be inserted here -->
+      </tbody>
+    </table>
+
+    <script>
+        // This function fetches all users and adds them to the table
+        async function fetchUsers() {
+          try {
+            const response = await fetch('/users');
+            const users = await response.json();
+      
+            const tableBody = document.getElementById('userTableBody');
+            tableBody.innerHTML = ""; // Clear existing rows
+      
+            users.forEach(user => {
+              // Add each user's data to the table
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                <td>${user.name}</td>
+                <td>${user.age}</td>
+                <td id="tax-${user._id}">${user.tax}</td>
+                <td><button onclick="incrementTax('${user._id}')">Add</button></td>
+                <td><button onclick="decrementTax('${user._id}')">Sub</button></td>
+              `;
+              tableBody.appendChild(row);
+            });
+          } catch (err) {
+            console.error("Error loading users:", err);
+          }
+        }
+      
+        // This function is called when you click the "Add" button
+        async function incrementTax(userId) {
+          try {
+            console.log("Sending PATCH to increment tax for user with ID:", userId);
+      
+            // Send PATCH request to the server to update the user's tax
+            const response = await fetch(`/users/${userId}`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' }
+            });
+      
+            if (response.ok) {
+              const updatedUser = await response.json();  // Get the updated user data
+              // Update the tax value displayed in the UI
+              const taxCell = document.getElementById(`tax-${userId}`);
+              taxCell.textContent = updatedUser.tax;
+            } else {
+              console.error("Failed to update tax.");
+            }
+          } catch (err) {
+            console.error("Error incrementing tax:", err);
+          }
+        }
+
+        async function decrementTax(userId) {
+            try{
+                console.log("Sending PATCH to decrement tax for user with ID:", userId);
+      
+            // Send PATCH request to the server to update the user's tax
+            const response = await fetch(`/users/${userId}/decrement`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' }
+            });
+      
+            if (response.ok) {
+              const updatedUser = await response.json();  // Get the updated user data
+              // Update the tax value displayed in the UI
+              const taxCell = document.getElementById(`tax-${userId}`);
+              taxCell.textContent = updatedUser.tax;
+            } else {
+              console.error("Failed to update tax.");
+            }
+            }catch{
+                console.error("❌ Error decrementing tax:", error);
+            }
+            
+        }
+      
+        // Call fetchUsers to populate the table when the page loads
+        fetchUsers();
+      </script>
+      
+  </body>
+</html>
